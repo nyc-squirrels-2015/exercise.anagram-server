@@ -7,16 +7,15 @@
     <input type="text" oninput="search(event)">
     <ul id="anagrams"></ul>
     <script>
-    "use strict";    
+    "use strict";
     var list = document.querySelector('#anagrams');
     var search = function(event) {
       var word = event.target.value;
-      // TODO: Construct an XMLHttpResponse, send a request for /word, and fill the results
-      // into list.
-      //
-      // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
-      // 
-      // Hint: xhr.responseType = 'json'.
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function() { doSomethingWith(xhr.response); };
+      xhr.open('get', url, true);
+      xhr.responseType = 'json';
+      xhr.send();
     }
     </script>
   </body>
