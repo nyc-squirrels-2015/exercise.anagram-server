@@ -1,4 +1,4 @@
-exports.words = [
+WORDS = [
 "A",
 "a",
 "aa",
@@ -235885,4 +235885,4 @@ exports.words = [
 "zythum",
 "Zyzomys",
 "Zyzzogeton",
-];
+]
