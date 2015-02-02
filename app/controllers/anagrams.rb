@@ -13,9 +13,9 @@ get '/:word' do |word|
 end
 
 get '/' do
-  send_file 'index.html'
+  p "log redirect to index"
+  redirect to('/index.html')
 end
-
 
 
 
