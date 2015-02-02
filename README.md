@@ -28,64 +28,41 @@ results.
 
 You can solve the anagrams problem however, even reusing your Phase 1 code if
 you like. I've gotten you started on the Sinatra code in
-[anagrams.rb](anagrams.rb).
+[app/controllers/anagrams.rb](app/controllers/anagrams.rb).
 
-You might take this moment to see if you can improve your methodology at all,
-or simplify your life in some other way. For example, I wrote a script to
-convert the dictionary into a *giiiiiiiant* Ruby array literal, so I could just
-`require_relative 'dict'`.
+You can run your server with the `shotgun` command. Shotgun restarts
+your server on every request, so you don't have to keep doing it.
 
 When you have it working, you should be able to run your program with `ruby anagrams.rb`,
-and make requests like: `http://localhost:4567/this`.
+and make requests like: `http://localhost:9393/this`.
 
-## 3. Write the test page ##
+The Sinatra skeleton is set up to serve files from [public](public). There's an
+[index.html](index.html) there which will query your server for anagrams as you type.
 
-The test page is in [index.html](index.html). It's not fancy. It's so not
-fancy that it has no stylesheet, and the Javascript right there in the same
-file with the HTML, lying together like cats and dogs.
-
-You'll write simple little test pages like this a lot, and it's fine if they
-look like this. They are the simplest answer to a simple problem. If the
-problem grows, and they become much more complex, they'll start to look ugly
-and hard to read. That's a good thing, because at that point, you'll know you
-should do some refactoring.
-
-The test page fetches results by constructing an `XMLHttpRequest` with the
-appropriate URL. `XMLHttpRequest` is provided by the browser, and it lets web
-pages make whatever HTTP requests they want (provided a whole set of security
-checks pass) via Javascript.
-
-I am actually going to make you construct and send an `XMLHttpRequest`
-manually. There are nicer wrappers for it, but using the request object
-manually isn't so bad. Here's the outline of it:
-
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function() { doSomethingWith(xhr.response); };
-    xhr.open('get', url, true);
-    xhr.responseType = 'json';    
-    xhr.send();
-
-Since we set the responseType to `json`, the browser will parse the response
-for us, and `xhr.response` will be a Javascript array. You can loop or `map`
-over it as you like. (Search MDN for the Array methods if you're not sure what
-they are—there are far fewer of them than Ruby provides, alas).
-
-When you're done, you should have a test page that searches anagrams as you
-type. Neat!
-
-## 4. Benchmark it! ##
+## 3. Benchmark it! ##
 
 I've included a little node program [bench.js](bench.js) that hammers away at
-an Anagrams server as fast as it can. First, you'll need to run `npm install`
-to download the dependencies. This is equivalent to `bundle install`, and you
-only have to do it once. Next, run it with `node bench.js` and see what
-results you get! If your server isn't running on port 4567 (the default port
-for Sinatra), you'll have to edit the program to change the port it's
-connecting to. It should probably take that as a command line arg (pull req?).
+an Anagrams server as fast as it can.
+
+First, you'll need to run `npm install` to download the
+dependencies. This is equivalent to `bundle install`, and you only
+have to do it once.
+
+Next, if you're running your server under shotgun, kill it with ^C and start
+it with `rackup` instead, running on port 4567:
+
+    rackup -p 4567
+
+Why? Remember, `shotgun` restarts your server each time a new
+connection comes in. You don't want to be doing that in the middle of
+a benchmark.
+
+Finally, run the benchmark with `node bench.js` and see what results
+you get!
 
 bench.js reports results in kqps—that is, thousands of queries per second. My
 Sinatra program was able to handle about 0.75kqps—that is, 750,000 anagram
-lookups per second.
+lookups per second on my laptop.
 
 On the lab machines, you should see better performance than that. If you're
 not, maybe you can change your server to be faster somehow. I'll give you a
@@ -102,7 +79,7 @@ the number of concurrent requests, performace is plummeting precipitiously.
 
 Why do you suppose this is?
 
-## 5. Write it in Javascript with Express ##
+## 4. Write it in Javascript with Express ##
 
 Now do it again, this time in Javascript. [Express](http://expressjs.com/) is
 a small web framework for Node. It's inspired by Sinatra, so the code will
@@ -112,14 +89,14 @@ included my `dict.js` in the repository, so you can use it. It's already
 required by the code in [anagrams.js](anagrams.js). `words` there is an array
 of words taken from `/usr/share/dict/words` on my computer.
 
-## 6. Test it out ##
+## 5. Test it out ##
 
 Since both of your anagrams servers have the same interface, you shouldn't
 have to change `index.html` at all to get it to work with the JS server. It
 doesn't know or care what it's talking to—it only cares that it can `GET /some_word`
 and get a JSON response.
 
-## 7. Race! ##
+## 6. Race! ##
 
 Now, for fun, edit [bench.js](bench.js) to point at your Node server.
 
