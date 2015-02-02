@@ -15,9 +15,9 @@
       console.log(word)
       var xhr = new XMLHttpRequest();
       xhr.onload = function() {processResponse(xhr.response)}
-      xhr.open('get', "/"+word,true)
+      xhr.open('get', "/"+word, true)
       xhr.responseType = 'json';
-      xhr.send;
+      xhr.send();
       //
       // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
       //
@@ -26,8 +26,10 @@
 
     var processResponse = function(jsonArray){
       console.log(jsonArray);
+      var list = document.querySelector('#anagrams');
       jsonArray.forEach (function(currentValue,index,array){
-        var listItem = document.createElement("<li>"+currentValue+"</li>");
+        var listItem = document.createElement("li");
+        listItem.innerHTML = currentValue;
         list.appendChild(listItem);
       })
 
