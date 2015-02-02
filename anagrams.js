@@ -6,8 +6,14 @@ app.use(express.static('.'));
 
 app.get('/:word', function(req, res) {
   // TODO: find anagrams for req.params.word
+  // var word =
+  for (var i = 0; i < words.length; i++) {
+    if words[i].split('').sort === request.params.word //word
+  }
+
+
   res.json([]);
-  // Always call res.end() when you're done.  
+  // Always call res.end() when you're done.
   res.end();
 });
 
