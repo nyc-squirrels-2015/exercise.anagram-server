@@ -1,4 +1,4 @@
-export.words = [
+DICTIONARY = [
 "A",
 "a",
 "aa",
