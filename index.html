@@ -6,8 +6,7 @@
   <body>
 
     <script>
-    "use strict";
-    var list = document.querySelector('#anagrams');
+    // var list = document.querySelector('#anagrams');
     var search = function(event) {
       var word = event.target.value;
       // TODO: Construct an XMLHttpResponse, send a request for /word, and fill the results
@@ -27,10 +26,12 @@
     var processResponse = function(jsonArray){
       console.log(jsonArray);
       var list = document.querySelector('#anagrams');
-      jsonArray.forEach (function(currentValue,index,array){
-        var listItem = document.createElement("li");
+      jsonArray.forEach (
+        function(currentValue,index,array){
+        listItem = document.createElement("li");
         listItem.innerHTML = currentValue;
-        list.appendChild(listItem);
+
+        list.appendChild(listItemem);
       })
 
     }
