@@ -1,6 +1,6 @@
 # exercise.anagram-server
 Make a couple of small HTTP servers that find and return anagrams.
-
+Because they didn't change it on the new version
 ## Introduction ##
 
 Remember [making anagrams](https://github.com/nyc-squirrels-2015/anagrams-2-generating-anagrams-challenge)?

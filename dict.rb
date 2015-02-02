@@ -1,4 +1,4 @@
-exports.words = [
+WORDS = [
 "A",
 "a",
 "aa",
