@@ -33,11 +33,6 @@ you like. I've gotten you started on the Sinatra code in
 You can run your server with the `shotgun` command. Shotgun restarts
 your server on every request, so you don't have to keep doing it.
 
-You might take this moment to see if you can improve your methodology at all,
-or simplify your life in some other way. For example, I wrote a script to
-convert the dictionary into a *giiiiiiiant* Ruby array literal, so I could just
-`require_relative 'dict'`.
-
 When you have it working, you should be able to run your program with `ruby anagrams.rb`,
 and make requests like: `http://localhost:9393/this`.
 
