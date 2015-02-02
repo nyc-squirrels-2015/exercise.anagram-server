@@ -1,11 +1,7 @@
-
 require 'sinatra'
 require 'json'
 require_relative 'dict'
 
-get '/' do
-  redirect '/index.html'
-end
 
 get '/:word' do |word|
   content_type :json
@@ -13,5 +9,6 @@ get '/:word' do |word|
   WORDS.select{|x| x.split("").sort == word.split("").sort}.to_json
 end
 
-
-
+get '/' do
+  send_file 'index.html'
+end
